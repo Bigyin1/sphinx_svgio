@@ -15,11 +15,11 @@ from sphinx.util.fileutil import copy_asset_file
 
 class svgio(nodes.General, nodes.Element):
 
-    def __init__(self, abs_path: str, page: int):
-        super().__init__()
+    def __init__(self, rawsource='', *children, **attributes):
+        super().__init__(rawsource=rawsource, *children, **attributes)
 
-        self.svg_file_path = abs_path
-        self.page = page
+        self.svg_file_path = attributes["svg_file_path"]
+        self.page = attributes["page"]
 
 
 def visit_svgio_node(self, node: svgio):
@@ -102,14 +102,11 @@ class SvgioDirective(SphinxDirective):
         rel_filename, filename = self.env.relfn2path(self.arguments[0])
 
         self._validate_file(rel_filename, filename)
-
         self.env.note_dependency(filename)
 
-        node = svgio(
-            filename,
-            self.options["page"] - 1 if "page" in self.options else 0,
-        )
+        page = self.options["page"] - 1 if "page" in self.options else 0
 
+        node = svgio(svg_file_path=filename, page=page)
         self.add_name(node)
 
         return [self._add_caption(node)]

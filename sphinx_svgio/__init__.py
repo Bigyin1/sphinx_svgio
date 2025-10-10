@@ -5,7 +5,7 @@ def setup(app) -> dict:
     setup_extension(app)
 
     return {
-        "version": "0.0.1",
+        "version": "0.0.4",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
