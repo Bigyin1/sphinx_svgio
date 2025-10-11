@@ -143,7 +143,7 @@ def init_numfig_format(app, config):
     config.numfig_format = numfig_format
 
 
-def setup_extension(app: Sphinx):
+def setup_svgio(app: Sphinx):
 
     app.add_config_value("drawio_js_offline_path", "", "html")
     app.connect("config-inited", init_numfig_format)
