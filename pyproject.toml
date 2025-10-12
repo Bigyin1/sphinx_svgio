@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sphinx_svgio"
-version = "0.0.4"
+version = "0.0.6"
 authors = [
   { name="Sergey Aparin"},
 ]
@@ -15,6 +15,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
+
+dependencies = ["sphinx>=7.1,<9", "importlib_resource"]
+
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
