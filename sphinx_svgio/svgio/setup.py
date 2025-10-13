@@ -6,20 +6,20 @@ from sphinx.util.fileutil import copy_asset_file
 
 from .. import static as static_module
 
+viewer_static = resources.files(static_module).joinpath("viewer-static.min.js")
+
 
 def add_js(app: Sphinx):
 
-    print(resources.files(static_module).joinpath("viewer-static.min.js"))
+    print(viewer_static)
 
-    abs_js_path = resources.files(static_module).joinpath("viewer-static.min.js")
-
-    app.add_js_file(path.basename(abs_js_path), loading_method="defer")
+    app.add_js_file(path.basename(viewer_static), loading_method="defer")
 
 
 def build_finished(app: Sphinx, _exception):
 
     copy_asset_file(
-        str(resources.files(static_module).joinpath("viewer-static.min.js")),
+        str(viewer_static),
         path.join(app.builder.outdir, '_static'),
         app.builder)
 
@@ -34,7 +34,6 @@ def init_numfig_format(app, config):
 
 def setup_svgio(app: Sphinx):
 
-    app.add_config_value("drawio_js_offline_path", "", "html")
     app.connect("config-inited", init_numfig_format)
     app.connect("builder-inited", add_js)
     app.connect('build-finished', build_finished)
