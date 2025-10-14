@@ -8,7 +8,7 @@ def setup(app) -> dict:
     setup_refs(app)
 
     return {
-        "version": "0.0.8",
+        "version": "0.0.9",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }

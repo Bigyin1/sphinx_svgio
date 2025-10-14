@@ -21,12 +21,12 @@ In rst:
 ```
 
 With `page` option you can choose an initial page of complex draw.io scheme.
-By default it is page `1`
+By default it is a page `1`
 
 
 ### Diagram Descriptions
 
-It is possible to add a description for every diagramm page.
+It is possible to add a description for every diagram page.
 Content of relevant `svgio-page::` will be moved right under diagram for convenience:
 
 ```rst
@@ -37,19 +37,16 @@ Content of relevant `svgio-page::` will be moved right under diagram for conveni
     :name: scheme_1
     :expand:
 
-    .. svgio-page::
-        :page: 1
+    .. svgio-page:: 1
 
         page 1 description
 
-    .. svgio-page::
-        :page: 2
+    .. svgio-page:: 2
 
         page 2 description
 
 
-    .. svgio-page::
-        :page: 3
+    .. svgio-page:: 3
 
         page 3 description
 ```
@@ -60,7 +57,7 @@ Presence of `:expand:` option keeps all pages in a list visible.
 
 ### Diagram Page references
 
-Page in a list can be referenced using for example:
+Page of diagram can be referenced using new reference type:
 
 ```rst
 :pageref:`Link title <scheme_1:2>`

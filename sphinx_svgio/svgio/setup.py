@@ -10,9 +10,6 @@ viewer_static = resources.files(static_module).joinpath("viewer-static.min.js")
 
 
 def add_js(app: Sphinx):
-
-    print(viewer_static)
-
     app.add_js_file(path.basename(viewer_static), loading_method="defer")
 
 

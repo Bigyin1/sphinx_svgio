@@ -10,15 +10,26 @@ LOGGER = getLogger(__name__)
 
 class SvgioPageDirective(SphinxDirective):
 
-    option_spec = {
-        "page": directives.positive_int,
-    }
-
     has_content = True
+    required_arguments = 1
+
+    def _validate_arg(self):
+        try:
+            page_num = int(self.arguments[0])
+        except ValueError:
+            raise self.error(
+                f"Bad page number: {self.arguments[0]}"
+            )
+        if page_num <= 0:
+            raise self.error(
+                f"Bad page number: {self.arguments[0]}"
+            )
+
+        return page_num - 1
 
     def run(self):
 
-        node = ListItemNode(page_id=self.options.get("page")-1)
+        node = ListItemNode(page_id=self._validate_arg())
 
         self.set_source_info(node)
         self.state.nested_parse(self.content, self.content_offset, node)
