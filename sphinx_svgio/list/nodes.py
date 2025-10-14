@@ -31,7 +31,8 @@ class ListNode(nodes.General, nodes.Element):
     def __init__(self, rawsource='', *children, **attributes):
         super().__init__(rawsource=rawsource, *children, **attributes)
 
-        self.diagram_name = attributes["diagram_name"]
+        self.diagram_name: str = attributes["diagram_name"]
+        self.expand: bool = attributes["expand"]
 
     @staticmethod
     def visit(self, node: 'ListNode'):
@@ -39,11 +40,17 @@ class ListNode(nodes.General, nodes.Element):
         tmpl = string.Template(
             '<div diagram_name=$diagram_name '
             'style="display: flex; '
-            'flex-direction: column;">'
+            'flex-direction: column;" '
+            '$expand'
+            '>'
         )
 
-        mxgraph = tmpl.substitute(diagram_name=node.diagram_name)
-        self.body.append(mxgraph)
+        text = tmpl.substitute(
+                diagram_name=node.diagram_name,
+                expand='expand' if node.expand else ''
+                )
+
+        self.body.append(text)
 
     @staticmethod
     def depart(self, node: 'ListNode'):
